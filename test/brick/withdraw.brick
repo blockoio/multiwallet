@@ -1,0 +1,36 @@
+batch ./init.brick
+
+# ========== Normal Transfer Test ==========
+# generate message
+query mymultisig genMsgToSign `["W", {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` "0x02a1be7516af6db9b4dcaf5feaf18c461e38fcfeb6224d6d9844a07a128cbf11"
+
+# send request
+call operator 0 mymultisig request `["W", 1, "3045022100a9d7a5f1ade0b3de8114e43e13ab41a9a6e6ecc213e7a0be21e7a11801dee10d022069cecb8bf1be16fff8d439f20cc2704a2c4b93e2c87b87ddb3e1d2436799aa6e", 2, "3046022100919057bb23de8c3a4a78310a29e5fd0320ffb2b4b97b9f330e291ed81c705640022100b4515f3c5467b5ad82ba6befc28c8db4418b3ba660dae0726505e18b6c369712",  {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]`
+
+# check balance
+getstate AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg 3000
+
+# ========== Abnormal Transfer Test ==========
+# send a request with same argument will fail
+call operator 0 mymultisig request `["W", 1, "3045022100a9d7a5f1ade0b3de8114e43e13ab41a9a6e6ecc213e7a0be21e7a11801dee10d022069cecb8bf1be16fff8d439f20cc2704a2c4b93e2c87b87ddb3e1d2436799aa6e", 2, "3046022100919057bb23de8c3a4a78310a29e5fd0320ffb2b4b97b9f330e291ed81c705640022100b4515f3c5467b5ad82ba6befc28c8db4418b3ba660dae0726505e18b6c369712",  {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` `Invalid Signature of 1`
+
+# Test with same request, but result will be changed. because nonce is increased
+query mymultisig genMsgToSign `["W", {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` "0x9a4362325e0ad78ef1712b3a2c05725c6d94b2ff581fa8d7c4afb39cc5e36612"
+
+
+# Test invalid owner
+call operator 0 mymultisig request `["W", 3, "304402203ff6b9547cd3fea75de73058bf5b604bc7999a00f26a7d891c3dd29aa1aacb1e02202abe64fbd766a4edd94644b5d9e9d5f618aa5e1ce2596b042ac774ffec87ce83", 2, "3045022100bc46bb1ad948605e1b2370488013872f1d3fbd75cb60b4a1bde136fba3f41400022029afd4b0b206fa6586f55f6d510871bf7c5b285efe8c9ab9498ab171ac40b6be",  {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` `Invalid Signature of 3`
+call operator 0 mymultisig request `["W", 1, "304402203ff6b9547cd3fea75de73058bf5b604bc7999a00f26a7d891c3dd29aa1aacb1e02202abe64fbd766a4edd94644b5d9e9d5f618aa5e1ce2596b042ac774ffec87ce83", 4, "3045022100bc46bb1ad948605e1b2370488013872f1d3fbd75cb60b4a1bde136fba3f41400022029afd4b0b206fa6586f55f6d510871bf7c5b285efe8c9ab9498ab171ac40b6be",  {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` `Invalid Signature of 4`
+call operator 0 mymultisig request `["W", 1, "304402203ff6b9547cd3fea75de73058bf5b604bc7999a00f26a7d891c3dd29aa1aacb1e02202abe64fbd766a4edd94644b5d9e9d5f618aa5e1ce2596b042ac774ffec87ce83", 1, "3045022100bc46bb1ad948605e1b2370488013872f1d3fbd75cb60b4a1bde136fba3f41400022029afd4b0b206fa6586f55f6d510871bf7c5b285efe8c9ab9498ab171ac40b6be",  {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` `Signers cannot be same`
+call operator 0 mymultisig request `["W", 5, "3045022100a9d7a5f1ade0b3de8114e43e13ab41a9a6e6ecc213e7a0be21e7a11801dee10d022069cecb8bf1be16fff8d439f20cc2704a2c4b93e2c87b87ddb3e1d2436799aa6e", 3, "3046022100919057bb23de8c3a4a78310a29e5fd0320ffb2b4b97b9f330e291ed81c705640022100b4515f3c5467b5ad82ba6befc28c8db4418b3ba660dae0726505e18b6c369712",  {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` `index out of range`
+
+# Balance must not be changed
+getstate AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg 3000
+
+# ========== Normal Transfer Test ==========
+call operator 0 mymultisig request `["W", 1, "304402203ff6b9547cd3fea75de73058bf5b604bc7999a00f26a7d891c3dd29aa1aacb1e02202abe64fbd766a4edd94644b5d9e9d5f618aa5e1ce2596b042ac774ffec87ce83", 2, "3045022100bc46bb1ad948605e1b2370488013872f1d3fbd75cb60b4a1bde136fba3f41400022029afd4b0b206fa6586f55f6d510871bf7c5b285efe8c9ab9498ab171ac40b6be",  {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]`
+getstate AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg 6000
+
+# Test Insufficient Balance
+call operator 0 mymultisig request `["W", 1, "sign", 2, "sign",  {"_bignum":"999000000000000000000000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` `Insufficient Balance`
+

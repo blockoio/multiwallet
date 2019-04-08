@@ -1,0 +1,26 @@
+reset
+
+# hex privatekey = d29c4e8d97f103cf8225b668aec8b1a989865b122b43319806ca155a526129b2
+inject AmN8hDGSQ2kK26KJVMYSc62VDBzAg5Z82GWKcUjTVCyQ5JcbLSsN 0
+
+# hex privatekey = 3c0786b01fa087a34ac814cd065a2f4056f37b01c76b261ab979be222659e187
+inject AmMMSQTszM59XfNDeSzSSXw71epSLdBxRhcXRmwDTdv3DFoTQNEx 0
+
+# hex privatekey = a11bf8d0af46c8202713be026756097838e6a822c9043ae49b0e044ff3131f67
+inject AmN9mDZAYh9MDkSENxjoxXQYKqsh452DZwJiirJWAzjCGqZ5DNCt 0
+
+# hex privatekey = a1716940afbb23dfa3c49ff9a6658ba1fb5804bb37a1aebcc62054e13823c5cc
+inject AmPCqAa5MaMQ1juPagVUxkDHKk6CRCXtjjVT3Rdio4HRQ8RwjWSS 0
+
+# address = AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg
+inject receiver 0
+
+# address = Amfzhv6pzRBm4U4p7evxiAYaz5VWghAYnDb8MfFuH4XWeZ9pGy4a
+inject operator 100000000000000000000000
+
+# deploy contract
+# address = AmhT3HiDftcGgNTZgRLnFDxAhgbxE6jmh4X53AbphChprTQXnAwL
+deploy operator 100000000000000000000000 mymultisig ../../contract/multisig2of4.lua `["AmN8hDGSQ2kK26KJVMYSc62VDBzAg5Z82GWKcUjTVCyQ5JcbLSsN", "AmMMSQTszM59XfNDeSzSSXw71epSLdBxRhcXRmwDTdv3DFoTQNEx", "AmN9mDZAYh9MDkSENxjoxXQYKqsh452DZwJiirJWAzjCGqZ5DNCt", "AmPCqAa5MaMQ1juPagVUxkDHKk6CRCXtjjVT3Rdio4HRQ8RwjWSS"]`
+
+# test owners query
+query mymultisig getOwners `[]` `[1,"AmN8hDGSQ2kK26KJVMYSc62VDBzAg5Z82GWKcUjTVCyQ5JcbLSsN",2,"AmMMSQTszM59XfNDeSzSSXw71epSLdBxRhcXRmwDTdv3DFoTQNEx",3,"AmN9mDZAYh9MDkSENxjoxXQYKqsh452DZwJiirJWAzjCGqZ5DNCt",4,"AmPCqAa5MaMQ1juPagVUxkDHKk6CRCXtjjVT3Rdio4HRQ8RwjWSS"]`

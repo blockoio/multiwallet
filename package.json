@@ -1,0 +1,23 @@
+{
+  "name": "@blocko/multiwallet",
+  "version": "0.0.1",
+  "description": "2 of 4 Multisig & Multipurpose Wallet for Aergo",
+  "main": "js/main.js",
+  "scripts": {
+    "build": "aergoluac --payload ./contract/multisig2of4.lua > ./dapp/build/contract.payload && webpack --config config/webpack.config.js",
+    "watch": "webpack --config config/webpack.config.js --watch",
+    "start": "webpack-dev-server --host 192.168.0.183 --hot --inline --config config/webpack.config.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "@babel/polyfill": "^7.2.5",
+    "@babel/preset-env": "^7.1.0",
+    "@herajs/client": "^0.8.3",
+    "@herajs/crypto": "^0.3.1",
+    "babel-loader": "^8.0.2",
+    "copy-webpack-plugin": "^5.0.0",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.2.0"
+  }
+}
