@@ -22,7 +22,7 @@ inject receiver 0
 # address = Amfzhv6pzRBm4U4p7evxiAYaz5VWghAYnDb8MfFuH4XWeZ9pGy4a
 inject operator 100000000000000000000000
 
-# deploy contract
+# deploy contract with 0.1M aergo
 # address = AmhT3HiDftcGgNTZgRLnFDxAhgbxE6jmh4X53AbphChprTQXnAwL
 deploy operator 100000000000000000000000 mymultisig ../../contract/multisig2of4.lua `["AmN8hDGSQ2kK26KJVMYSc62VDBzAg5Z82GWKcUjTVCyQ5JcbLSsN", "AmMMSQTszM59XfNDeSzSSXw71epSLdBxRhcXRmwDTdv3DFoTQNEx", "AmN9mDZAYh9MDkSENxjoxXQYKqsh452DZwJiirJWAzjCGqZ5DNCt", "AmPCqAa5MaMQ1juPagVUxkDHKk6CRCXtjjVT3Rdio4HRQ8RwjWSS"]`
 
