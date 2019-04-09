@@ -67,7 +67,7 @@
         <th></th>
       </tr>
   <tr>
-    <td td width="150"><input type="button" id="withdrawGenMsgButton" value="Query Gen Msg"></td>
+    <td td width="150"><input type="button" id="genMsgButton" value="Query Gen Msg"></td>
     <td colspan="2"><input type="text" id="withdrawResultText" size="65" placeholder="( query result be generated here )" readonly></textarea> </td>
   </tr>
   <tr>
@@ -107,52 +107,15 @@
 </div>
 
 <br>
-<button id="guideDiv" class="collapsible">Operation Tips</button>
+<button id="guideDiv" class="collapsible">Resources</button>
 <div class="content">
 <h2>Download</h2>
 <a href="multisig2of4.lua">Source Code</a>
 <br>
 <a href="contract.payload">Compiled Payload</a>
 
-<h2> Step </h2>
-<ol>
-<li> IDE 또는 Cli로 컨트랙트를 Deploy</li>
-<li> Deploy된 컨트랙트 주소를 Contract Address란에 입력해 로드</li>
-<li> 작업자는 요청 타입을 선택; Withdraw(출금), Staking, Unstaking, Voting </li>
-<li> 타입에 따라 상단의 관련 정보를 기입후 'Query Gen Msg' 버튼 클릭 </li>
-<li> 생성된 메시지를 2명이상의 Owner에게 전달</li>
-<li> Owner들은 해당 결과를 자신의 Key로 서명해 다시 작업자에게 전달 </li>
-<li> 2개 이상의 서명을 하단의 Owner ID와 Signed Message에 기입 </li>
-<li> 'Gen Req Payload' 버튼 클릭 </li>
-<li> 생성된 Payload로 지갑 컨트랙트에 Call, Send Tx</li>
-<li> 수행 결과를 아르고 스캔등을 통해 확인</li>
-</ol>
-
-<h2>Deploy using Athena IDE</h2>
-1. 컨트랙트파일 가져오기 <br>
-2. 컴파일 <br>
-3. Deploy with args: owner1, owner2, owner3, owner4 <br>
-
-<h2>AergoCli를 이용한 Deploy Hint </h2>
-
-export owner1addr=<i id='o1'></i> 
-<br>
-export owner2addr=<i id='o2'></i> 
-<br>
-export owner3addr=<i id='o3'></i> 
-<br>
-export owner4addr=<i id='o4'></i> 
-<br><br>
-export ahost={server_ip}
-<br><br>
-export sender=$(aergocli account import -H $ahost --if {exported_private_key} --password {password})
-<br><br>
-aergocli account unlock -H $ahost  --address $sender --password {password}
-<br><br>
-export ctr_payload={contract_payload}
-<br><br>
-aergocli contract deploy -H $ahost --amount {initial_deposit_amount} --payload $ctr_payload $sender [\"$owner1addr\",\"$owner2addr\",\"$owner3addr\",\"$owner4addr\"]
-<br>
+<h2>Repository</h2>
+<a href="https://github.com/blockoio/multiwallet">Link</a>
 </div>
 </body>
 <script src="main.js"></script>

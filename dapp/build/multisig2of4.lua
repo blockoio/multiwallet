@@ -12,13 +12,13 @@ function _typecheck(x, f)
     -- check character
     local invalidChar = string.match(x, '[^123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]')
     assert(nil == invalidChar,
-      string.format("invalid address format: %s contains invalid char %s", x, invalidChar))
+      string.format("invalid address format: %s contains invalid char %s", x, invalidChar or 'nil'))
   elseif (x and f == 'bignum') then
     -- check bignum
     assert(bignum.isbignum(x), string.format("invalid format: %s != %s", type(x), f))
   else
     -- check default lua types
-    assert(type(x) == f, string.format("invalid format: %s != %s", type(x), f))
+    assert(type(x) == f, string.format("invalid format: %s != %s", type(x), f or 'nil'))
   end
 end
 
