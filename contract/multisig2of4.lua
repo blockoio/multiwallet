@@ -149,7 +149,8 @@ function request(str_reqType, num_ownerId1, str_signedMsgOwner1,  num_ownerId2, 
     contract.event('unstake', amount)
   elseif str_reqType == 'V' then
     contract.vote(unpack(ballots))
-    contract.event('vote', unpack(ballots))
+    -- printing all ids will exceed max event size, so print just number of bps
+    contract.event('vote', #ballots)
   end
 end
 
