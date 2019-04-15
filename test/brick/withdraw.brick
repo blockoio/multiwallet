@@ -17,7 +17,6 @@ call operator 0 mymultisig request `["W", 1, "3045022100a9d7a5f1ade0b3de8114e43e
 # Test with same request, but result will be changed. because nonce is increased
 query mymultisig genMsgToSign `["W", {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` "0x9a4362325e0ad78ef1712b3a2c05725c6d94b2ff581fa8d7c4afb39cc5e36612"
 
-
 # Test invalid owner
 call operator 0 mymultisig request `["W", 3, "304402203ff6b9547cd3fea75de73058bf5b604bc7999a00f26a7d891c3dd29aa1aacb1e02202abe64fbd766a4edd94644b5d9e9d5f618aa5e1ce2596b042ac774ffec87ce83", 2, "3045022100bc46bb1ad948605e1b2370488013872f1d3fbd75cb60b4a1bde136fba3f41400022029afd4b0b206fa6586f55f6d510871bf7c5b285efe8c9ab9498ab171ac40b6be",  {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` `Invalid Signature of 3`
 call operator 0 mymultisig request `["W", 1, "304402203ff6b9547cd3fea75de73058bf5b604bc7999a00f26a7d891c3dd29aa1aacb1e02202abe64fbd766a4edd94644b5d9e9d5f618aa5e1ce2596b042ac774ffec87ce83", 4, "3045022100bc46bb1ad948605e1b2370488013872f1d3fbd75cb60b4a1bde136fba3f41400022029afd4b0b206fa6586f55f6d510871bf7c5b285efe8c9ab9498ab171ac40b6be",  {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` `Invalid Signature of 4`
@@ -31,6 +30,10 @@ getstate AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg 3000
 call operator 0 mymultisig request `["W", 1, "304402203ff6b9547cd3fea75de73058bf5b604bc7999a00f26a7d891c3dd29aa1aacb1e02202abe64fbd766a4edd94644b5d9e9d5f618aa5e1ce2596b042ac774ffec87ce83", 2, "3045022100bc46bb1ad948605e1b2370488013872f1d3fbd75cb60b4a1bde136fba3f41400022029afd4b0b206fa6586f55f6d510871bf7c5b285efe8c9ab9498ab171ac40b6be",  {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]`
 getstate AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg 6000
 
+# ========== More Abnormal Transfer Test ==========
 # Test Insufficient Balance
 call operator 0 mymultisig request `["W", 1, "sign", 2, "sign",  {"_bignum":"999000000000000000000000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` `Insufficient Balance`
 
+# Test Minus Balance
+query mymultisig genMsgToSign `["W", {"_bignum":"-1000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` "0x5901f7c77c849fd945ec6a36fbd316e2b93340a55fd979d2ec25e58c2671d4db"
+call operator 0 mymultisig request `["W", 1, "0x304502207ef03fd2a8ec1f689483d55c4aac4bfbe30ef582755e6bb732264bc49fb6c644022100f98a394da148ffd6427a3b92e882a5f6ef7484a9aea9fc565cb3f33fc596a97f", 2, "0x304502210080b27ddb84ccbded9ad2610efc3b76f052d6430ad47cd65195672a9ed49abfb302200d2886cd56a81c5f37473d64719612fd645a5435c15c04a85c50f8b9e54dcb86", {"_bignum":"-1000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` `negative amount not allowed`
