@@ -20,7 +20,9 @@ inject AmPCqAa5MaMQ1juPagVUxkDHKk6CRCXtjjVT3Rdio4HRQ8RwjWSS 0
 inject receiver 0
 
 # address = Amfzhv6pzRBm4U4p7evxiAYaz5VWghAYnDb8MfFuH4XWeZ9pGy4a
-inject operator 100000000000000000000000
+# charge 0.1M aergo to keep at contract and 1 aergo to pay fee
+# TODO FIXME if fee is removed for brick
+inject operator 100001000000000000000000 
 
 # deploy contract with 0.1M aergo
 # address = AmhT3HiDftcGgNTZgRLnFDxAhgbxE6jmh4X53AbphChprTQXnAwL

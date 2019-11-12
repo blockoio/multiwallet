@@ -2,10 +2,10 @@ batch ./init.brick
 
 # ========== Normal Transfer Test ==========
 # generate message
-query mymultisig genMsgToSign `["W", {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` "0x02a1be7516af6db9b4dcaf5feaf18c461e38fcfeb6224d6d9844a07a128cbf11"
+query mymultisig genMsgToSign `["W", {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` "0x6bdd2f4c29f76b7cfd9d86bad5584ac98f00f268d9d0d7913d1a13df4e8b2f15"
 
 # send request
-call operator 0 mymultisig request `["W", 1, "3045022100a9d7a5f1ade0b3de8114e43e13ab41a9a6e6ecc213e7a0be21e7a11801dee10d022069cecb8bf1be16fff8d439f20cc2704a2c4b93e2c87b87ddb3e1d2436799aa6e", 2, "3046022100919057bb23de8c3a4a78310a29e5fd0320ffb2b4b97b9f330e291ed81c705640022100b4515f3c5467b5ad82ba6befc28c8db4418b3ba660dae0726505e18b6c369712",  {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]`
+call operator 0 mymultisig request `["W", 1, "0x304402201df3cd068f225dcd239ef293503e9d0261b240a0cce2fda5cfa4ffc184ce06b2022002695b2c6a35e641f46abdbf0ed16ab32817edf23783a2b9e613f2d06d4e5a5c", 2, "0x304402207abc94f47247433d9520127bba2e69576ecd7525b8e595174377cecc8ad32a1002201141552f87894a58a3ccca70368358afd7f3f2ff597a58d51c59fe832d312abf",  {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]`
 
 # check balance
 getstate AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg 3000
@@ -15,19 +15,19 @@ getstate AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg 3000
 call operator 0 mymultisig request `["W", 1, "3045022100a9d7a5f1ade0b3de8114e43e13ab41a9a6e6ecc213e7a0be21e7a11801dee10d022069cecb8bf1be16fff8d439f20cc2704a2c4b93e2c87b87ddb3e1d2436799aa6e", 2, "3046022100919057bb23de8c3a4a78310a29e5fd0320ffb2b4b97b9f330e291ed81c705640022100b4515f3c5467b5ad82ba6befc28c8db4418b3ba660dae0726505e18b6c369712",  {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` `Invalid Signature of 1`
 
 # Test with same request, but result will be changed. because nonce is increased
-query mymultisig genMsgToSign `["W", {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` "0x9a4362325e0ad78ef1712b3a2c05725c6d94b2ff581fa8d7c4afb39cc5e36612"
+query mymultisig genMsgToSign `["W", {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` "0x6c585778c2d0cdf768ee22f380c66bd856ecb81bb373a9902d958af907a8f6af"
 
 # Test invalid owner
-call operator 0 mymultisig request `["W", 3, "304402203ff6b9547cd3fea75de73058bf5b604bc7999a00f26a7d891c3dd29aa1aacb1e02202abe64fbd766a4edd94644b5d9e9d5f618aa5e1ce2596b042ac774ffec87ce83", 2, "3045022100bc46bb1ad948605e1b2370488013872f1d3fbd75cb60b4a1bde136fba3f41400022029afd4b0b206fa6586f55f6d510871bf7c5b285efe8c9ab9498ab171ac40b6be",  {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` `Invalid Signature of 3`
-call operator 0 mymultisig request `["W", 1, "304402203ff6b9547cd3fea75de73058bf5b604bc7999a00f26a7d891c3dd29aa1aacb1e02202abe64fbd766a4edd94644b5d9e9d5f618aa5e1ce2596b042ac774ffec87ce83", 4, "3045022100bc46bb1ad948605e1b2370488013872f1d3fbd75cb60b4a1bde136fba3f41400022029afd4b0b206fa6586f55f6d510871bf7c5b285efe8c9ab9498ab171ac40b6be",  {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` `Invalid Signature of 4`
-call operator 0 mymultisig request `["W", 1, "304402203ff6b9547cd3fea75de73058bf5b604bc7999a00f26a7d891c3dd29aa1aacb1e02202abe64fbd766a4edd94644b5d9e9d5f618aa5e1ce2596b042ac774ffec87ce83", 1, "3045022100bc46bb1ad948605e1b2370488013872f1d3fbd75cb60b4a1bde136fba3f41400022029afd4b0b206fa6586f55f6d510871bf7c5b285efe8c9ab9498ab171ac40b6be",  {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` `Signers cannot be same`
+call operator 0 mymultisig request `["W", 3, "0x3045022100ab68dc468549f1a7afa1a39921cf0dd3688ebcf9608233ea2263d3fee4aa7fa60220034cb682d7720bc2e7220167c491e0c092e26de253e75c5fbc670ae1701963ac", 2, "0x304502203f3a9038003aed88d7d605c16104ad310cc3096383e0966287d2829cb1680ced022100fda1917afa8ab95e337e5e8793cd12815b7090cac94415ee34927afea952a746",  {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` `Invalid Signature of 3`
+call operator 0 mymultisig request `["W", 1, "0x3045022100ab68dc468549f1a7afa1a39921cf0dd3688ebcf9608233ea2263d3fee4aa7fa60220034cb682d7720bc2e7220167c491e0c092e26de253e75c5fbc670ae1701963ac", 4, "0x304502203f3a9038003aed88d7d605c16104ad310cc3096383e0966287d2829cb1680ced022100fda1917afa8ab95e337e5e8793cd12815b7090cac94415ee34927afea952a746",  {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` `Invalid Signature of 4`
+call operator 0 mymultisig request `["W", 1, "0x3045022100ab68dc468549f1a7afa1a39921cf0dd3688ebcf9608233ea2263d3fee4aa7fa60220034cb682d7720bc2e7220167c491e0c092e26de253e75c5fbc670ae1701963ac", 1, "0x304502203f3a9038003aed88d7d605c16104ad310cc3096383e0966287d2829cb1680ced022100fda1917afa8ab95e337e5e8793cd12815b7090cac94415ee34927afea952a746",  {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` `Signers cannot be same`
 call operator 0 mymultisig request `["W", 5, "3045022100a9d7a5f1ade0b3de8114e43e13ab41a9a6e6ecc213e7a0be21e7a11801dee10d022069cecb8bf1be16fff8d439f20cc2704a2c4b93e2c87b87ddb3e1d2436799aa6e", 3, "3046022100919057bb23de8c3a4a78310a29e5fd0320ffb2b4b97b9f330e291ed81c705640022100b4515f3c5467b5ad82ba6befc28c8db4418b3ba660dae0726505e18b6c369712",  {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` `index out of range`
 
 # Balance must not be changed
 getstate AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg 3000
 
 # ========== Normal Transfer Test ==========
-call operator 0 mymultisig request `["W", 1, "304402203ff6b9547cd3fea75de73058bf5b604bc7999a00f26a7d891c3dd29aa1aacb1e02202abe64fbd766a4edd94644b5d9e9d5f618aa5e1ce2596b042ac774ffec87ce83", 2, "3045022100bc46bb1ad948605e1b2370488013872f1d3fbd75cb60b4a1bde136fba3f41400022029afd4b0b206fa6586f55f6d510871bf7c5b285efe8c9ab9498ab171ac40b6be",  {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]`
+call operator 0 mymultisig request `["W", 1, "0x3045022100ab68dc468549f1a7afa1a39921cf0dd3688ebcf9608233ea2263d3fee4aa7fa60220034cb682d7720bc2e7220167c491e0c092e26de253e75c5fbc670ae1701963ac", 2, "0x304502203f3a9038003aed88d7d605c16104ad310cc3096383e0966287d2829cb1680ced022100fda1917afa8ab95e337e5e8793cd12815b7090cac94415ee34927afea952a746",  {"_bignum":"3000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]`
 getstate AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg 6000
 
 # ========== More Abnormal Transfer Test ==========
@@ -35,5 +35,5 @@ getstate AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg 6000
 call operator 0 mymultisig request `["W", 1, "sign", 2, "sign",  {"_bignum":"999000000000000000000000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` `Insufficient Balance`
 
 # Test Minus Balance
-query mymultisig genMsgToSign `["W", {"_bignum":"-1000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` "0x5901f7c77c849fd945ec6a36fbd316e2b93340a55fd979d2ec25e58c2671d4db"
-call operator 0 mymultisig request `["W", 1, "0x304502207ef03fd2a8ec1f689483d55c4aac4bfbe30ef582755e6bb732264bc49fb6c644022100f98a394da148ffd6427a3b92e882a5f6ef7484a9aea9fc565cb3f33fc596a97f", 2, "0x304502210080b27ddb84ccbded9ad2610efc3b76f052d6430ad47cd65195672a9ed49abfb302200d2886cd56a81c5f37473d64719612fd645a5435c15c04a85c50f8b9e54dcb86", {"_bignum":"-1000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` `negative amount not allowed`
+query mymultisig genMsgToSign `["W", {"_bignum":"-1000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` "0x87778207801c8dea7183d97728ab5d8001e7452a6e6da1a458b0e9f96b5d0798"
+call operator 0 mymultisig request `["W", 1, "0x3045022100f92c93aab79f9cab1ba1f18c177e73766a907274f6abe1fecadae4350f9b42ec02202a97bb5c8131d42171491c5a39ace011c5becfda5b49da2dbe86232b9a092f53", 2, "0x30440220722bbb564e3be24bd9ba4f1aa64fcc2cd44c1f599d5e4b5168cc06c52b29197b022016c221dc67477d36689293d7ecb02cb25a8e69c9c4bbd8fa232973dfa33e7b19", {"_bignum":"-1000"}, "AmgvoYtqaYvqb5mFdXa2vT4Mgz8omApc19P4QgUNqHroswy8GvWg"]` `negative amount not allowed`

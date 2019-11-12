@@ -1,0 +1,34 @@
+batch ./init.brick
+
+# ========== stake 10000 aergo ==========
+query mymultisig genMsgToSign `["S", {"_bignum":"10000000000000000000000"}]` "0x8e6209c9c39ab14313b94f48e44a9a93eeeb8c2fb4c667c67af8ce7ff4fe67f4"
+call operator 0 mymultisig request `["S", 1, "0x3045022100a47c3b02600886f957a99530fd205b1dca5c8b0152474100451797ccba425c96022051ba5a2870a166262075dfa76e7807c4e1529e8b28886108d130c0d4ff3ce491", 2, "0x30460221008c718954669bc6e1a933b9c88ae28d6c88ace1b9feb20690ea0abbfe1150138b022100a017a513004d751ea7cdf710deaf9d0d82614eb02b8ada342a4315f43542a014",  {"_bignum":"10000000000000000000000"}]`
+
+# ========== Vote to BPCOUNT ==========
+query mymultisig genMsgToSign `["D", {"_bignum":"1"}, "BPCOUNT"]` "0xdbd6eaa5a1768b261862de21b14a70342f638a7865b6b57c1e37a14cb88e63a6"
+call operator 0 mymultisig request `["D", 1, "0x304402202ec74cd910a172f4d90770bb33dad2763bcaf5c29045609c3d407fd88db29aa50220178ef5109ce2cbdcd9370d5f0e93ef2dcf204e88da9665efedc251e361a843a8", 2, "0x30440220245d363ccb057e9b614eef7cc83d92dfe42c9eb2ffadeb41901acf3bc0c966d902203e4ba908a1ffdd70c107268660ae08600494fec9edb6cd62c3ed6a6542b4f5c0", {"_bignum":"1"}, "BPCOUNT"]`
+
+# ========== Vote to bpCOUNT (small+big letter) ==========
+# need time to vote again
+forward 86399
+query mymultisig genMsgToSign `["D", {"_bignum":"10"}, "bpCOUNT"]` "0xd7634233a590f69500b04df572314734f6397e5c99cdaf0173b40004fc5dd0e2"
+call operator 0 mymultisig request `["D", 1, "0x3046022100cbd47154b49f3c1d9f0c9c044c7a44ef4fb90c1b11a7330316325e99f0ea26dd022100c20551ad2a55b781c2490d07f5168f2b154488f87de70b334d673a61ec0d69a1", 2, "0x3045022100bd45d251298f6064796477e9f5e90b5d72281ab4b6071f04011303392efe025d022051d779c88a6cd689c3f6d5e4db96cb4ffdd91df89617e605f0909e8e18196638", {"_bignum":"10"}, "bpCOUNT"]`
+
+# ========== Vote to GASPRICE ==========
+forward 86399
+query mymultisig genMsgToSign `["D", {"_bignum":"5000000"}, "GASPRICE"]` "0xe4fd6aacbe4133fa7e1ffe9a7ac3220f9cd347f9410b7ebd2e96f097b4a67741"
+call operator 0 mymultisig request `["D", 1, "0x3045022100b45545d8da95fd800da776bdf6ff8d97423b0d82366dda47b32f12ba5e0cf6e102205878d466504b6c771fa4b98a614b58f1270ade8fdd00a5466d1fcacb05b35995", 2, "0x304502202c07d9426d11e5a1a073d6633fc25a103aad4bc308f707bcf8364ca49c66f4670221008b977f131064ea6c31d5cfa15de79c7fbf8549cd4859c926894701f8aa948a68", {"_bignum":"5000000"}, "GASPRICE"]`
+
+# ========== Vote to NAMEPRICE ==========
+forward 86399
+query mymultisig genMsgToSign `["D", {"_bignum":"500000000000"}, "NAMEPRICE"]` "0x8f777f9c81b88c8b3e20fd97dbe9827d4794be68e663314885ecba0b075bb623"
+call operator 0 mymultisig request `["D", 1, "0x3046022100994786dab4604c29533f49149b9b607e3117a611a34954b85652a570a328972c02210093a9e7064c8513e66383b5755c69cef636a8b60072d8a0fea211aafb2e9e6ee6", 2, "0x3045022100b729bd4de6389158f230f97ccacbfbbbe567c8b2b0744fdfdc5a54a7cd9fe71202200d97d744ba7cdaeaf585d5c76b0b3419d4dc3292b39983530a40a8b0d731b2e9", {"_bignum":"500000000000"}, "NAMEPRICE"]`
+
+# ========== Vote to STAKINMIN ==========
+forward 86399
+query mymultisig genMsgToSign `["D", {"_bignum":"1000000000000000000000000"}, "STAKINGMIN"]` "0x7e778e510c29bbc1f65e557755c4776533b836af5fe31299f871fb8cb78ff921"
+call operator 0 mymultisig request `["D", 1, "0x3045022100c84c4e3064df1ac7e43e1413cc904c074352d66b27e9ce5ac2662478f87a9237022046b2557d9d37bfd3ff5c4b99febb54e7b620aeb2d0400e3f4bef0767b75d6333", 2, "0x30460221009fbaf6d18827b3e90c496ba2efc21c90deb859b21483e7b1a2e229440adc3c47022100d0d04d4487ce25097a94b8edd79949fb45e6b4b97f7b8526e9cbce304b6cbcf8", {"_bignum":"1000000000000000000000000"}, "STAKINGMIN"]`
+
+# ========== Fail test: invalid name ==========
+query mymultisig genMsgToSign `["D", {"_bignum":"1"}, "NONEXISTING"]` "0x7a7c752342996f9aba375c4fdd1d0f76ce17f88d2e8a411d0eaaf579dc9fe87b"
+call operator 0 mymultisig request `["D", 1, "0x304402207c72ae9748999a4e367554f8b7b6371ee34ef5459ba38bd2ed2c8cbaf3d917fb022008d46064610c0a3e8f58775ff07ec6ce015bea0cd73e36e7dea4413668583f3c", 2, "0x304502203dfc13b9fdb25766c8df0fd7c0849dc00f341e13beb13c933ca026900d8386ce022100e5fcb14a34b6e862c5d9d7f4d4d43c0f6e592016c50e68232ceaac837e9bbf8b", {"_bignum":"1"}, "NONEXISTING"]` `invalid id`
