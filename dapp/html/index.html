@@ -37,11 +37,11 @@
       <table>
         <tr>
           <td width="150">Amount:</td>
-          <td><input type="text" id="amountText" size="30"></td>
+          <td><input type="text" id="amountText" size="30"> aer (<span id="amountConv">0</span> aergo)</td>
         </tr>
         <tr>
           <td>To Address:</td>
-          <td><input type="text" id="toAddressOrDaoNameText" size="52"></td>
+          <td><input type="text" id="toAddressText" size="52"></td>
         </tr>
       </table>
     </div>
@@ -50,7 +50,7 @@
       <table>
         <tr>
           <td width="150">Amount:</td>
-          <td><input type="text" id="stakeAndUnstakeAmountText" size="30"></td>
+          <td><input type="text" id="stakeAndUnstakeAmountText" size="30"> aer (<span id="stakeAmountConv">0</span> aergo)</td>
       </table>
     </div>
 
@@ -85,10 +85,35 @@
         <th></th>
       </tr>
       <tr>
-        <td td width="150"><input type="button" id="genMsgButton" value="Query Gen Msg"></td>
-        <td colspan="2"><input type="text" id="withdrawResultText" size="75"
-            placeholder="( query result be generated here )" readonly></textarea> </td>
+        <td>
+          <input type="button" id="shareButton" value="Create Request URL">
+        </td>
+        <td colspan="2">
+            <input type="text" id="shareRequestText" size="65"
+            placeholder="( link for sharing and requesting sign )" readonly>
+          </td>
       </tr>
+      <tr>
+        <td>
+          <input type="button" id="signButton" value="Sign to the Request">
+        </td>
+        <td colspan="2">
+          <input type="text" id="signedMsgText" size="65"
+          placeholder="( signed generated query result )" readonly>
+        </td>
+      </tr>
+      <!-- spacing start -->
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr class="top-border">
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <!-- spacing end -->
       <tr>
         <th></th>
         <th>Owner ID</th>
@@ -119,9 +144,7 @@
         <td><input type="text" id="signedMsgText2" size="65"></td>
       </tr>
       <tr>
-        <td><input type="button" id="genRequestPayloadButton" value="Gen Req Payload"></td>
-        <td colspan="2"><textarea id="requestResultText" cols="80" rows="5"
-            placeholder="( payload will be generated here )" readonly></textarea></td>
+        <td colspan="3" align="center"><input type="button" id="sendRequestButton" value="Send Request"></td>
       </tr>
     </table>
   </div>

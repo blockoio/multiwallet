@@ -28,10 +28,10 @@ td {
 }
 
 tr.top-border { 
-    border-top: 1px solid grey;
+    border-top: 1px solid silver;
 }
 tr.bottom-border { 
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid silver;
 }
 
 /* Style the tab */

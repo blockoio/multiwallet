@@ -161,7 +161,7 @@ function request(str_reqType, num_ownerId1, str_signedMsgOwner1,  num_ownerId2, 
     contract.event('vote', #ballots)
   elseif str_reqType == 'D' then
     contract.voteDao(receiverOrVoteName, bignum.tostring(amount))
-    contract.event('voteDao', receiverOrVoteName, bignum.tostring(amount))
+    contract.event('voteDao', amount, receiverOrVoteName)
   end
 end
 
