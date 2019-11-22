@@ -262,7 +262,7 @@ document.getElementById('sendRequestButton').addEventListener('click', async fun
       alert(errorMsg);
     } else {
       try {
-        alert(await sendTxByAergoConnect(serverAddress, contractAddress, payload)); // display a tx receipt
+        alert(JSON.stringify(await sendTxByAergoConnect(serverAddress, contractAddress, payload))); // display a tx receipt
       } catch (e) {
         alert(e); // display an error
       }

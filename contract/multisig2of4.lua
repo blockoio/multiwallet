@@ -151,17 +151,12 @@ function request(str_reqType, num_ownerId1, str_signedMsgOwner1,  num_ownerId2, 
     contract.event('withdraw', amount, receiverOrVoteName)
   elseif str_reqType == 'S' then
     contract.stake(amount)
-    contract.event('stake', amount)
   elseif str_reqType == 'U' then
     contract.unstake(amount)
-    contract.event('unstake', amount)
   elseif str_reqType == 'V' then
     contract.vote(unpack(ballots))
-    -- printing all ids will exceed max event size, so print just number of bps
-    contract.event('vote', #ballots)
   elseif str_reqType == 'D' then
     contract.voteDao(receiverOrVoteName, bignum.tostring(amount))
-    contract.event('voteDao', amount, receiverOrVoteName)
   end
 end
 
