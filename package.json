@@ -1,6 +1,6 @@
 {
   "name": "@blocko/multiwallet",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "2 of 4 Multisig & Multipurpose Wallet for Aergo",
   "main": "js/main.js",
   "scripts": {
