@@ -23,7 +23,7 @@ function _typecheck(x, f)
 end
 
 -- Parse input variable args and return according to a type of following request.
--- [Common input] type of request; must be one of W(withdraw), S(stake), U(unstake), V(vote), D(voteDAO)
+-- [Common input] type of request; must be one of W(withdraw), S(stake), U(unstake), V(vote)
 -- [withdraw]
 --  in: type, (bignum) amount, (address) receiver_address
 --  out: (bignum) amount, (address) receiver_address, nil
@@ -33,12 +33,9 @@ end
 -- [unstake]
 --  in: type, (bignum) amount
 --  out: (bignum) amount, nil, nil
--- [vote] 
+-- [vote] string
 --  in: type, (string) peer_id_1, (string) peer_id_2, (string) peer_id_3, ...
 --  out: nil, nil, (string) peer_id_1, (string) peer_id_2, (string) peer_id_3, ...
--- [vote DAO]
---  in: type, (bignum) amount, (string) vote_name
---  out: (bignum) amount, (string) vote_name
 function _parse(type, ...)
   if type == 'W' then
     local amount, receiver = unpack({...})
@@ -68,19 +65,14 @@ function _parse(type, ...)
     end
 
     return nil, nil, {...}
-  elseif type == 'D' then
-    local amount, vote_name = unpack({...})
-    _typecheck(amount, 'bignum')
-    _typecheck(vote_name, 'string')
 
-    return amount, vote_name
   else
     error('Unsupported request type')
   end
 end
 
 -- combine input args and generage a msg to request sign
-function _genMsg(reqType, amount, receiverOrVoteName, ballots)
+function _genMsg(reqType, amount, receiver, ballots)
   local msg = reqType
   if ballots ~= nil then
     -- append multiple ballots
@@ -89,7 +81,7 @@ function _genMsg(reqType, amount, receiverOrVoteName, ballots)
     end
   end
   -- append rest args
-  msg = msg..(receiverOrVoteName or '')..(amount ~= nil and (bignum.tostring(amount)..',') or '')..tostring(Nonce:get())..system.getContractID()
+  msg = msg..(receiver or '')..(amount ~= nil and bignum.tostring(amount) or '')..tostring(Nonce:get())..system.getContractID()
 
   return crypto.sha256(msg)
 end
@@ -125,9 +117,9 @@ function default()
 end
 
 function genMsgToSign(type, ...)
-    local amount, receiverOrVoteName, ballots = _parse(type, ...)
+    local amount, receiver, ballots = _parse(type, ...)
 
-    return _genMsg(type, amount, receiverOrVoteName, ballots)
+    return _genMsg(type, amount, receiver, ballots)
 end
 
 function request(str_reqType, num_ownerId1, str_signedMsgOwner1,  num_ownerId2, str_signedMsgOwner2, ...)
@@ -135,8 +127,8 @@ function request(str_reqType, num_ownerId1, str_signedMsgOwner1,  num_ownerId2, 
   assert(num_ownerId1 ~= num_ownerId2, "Signers cannot be same")
 
   -- generate message internally
-  local amount, receiverOrVoteName, ballots = _parse(str_reqType, ...)
-  local msg = _genMsg(str_reqType, amount, receiverOrVoteName, ballots)
+  local amount, receiver, ballots = _parse(str_reqType, ...)
+  local msg = _genMsg(str_reqType, amount, receiver, ballots)
 
   -- check sign
   assert(crypto.ecverify(msg, str_signedMsgOwner1, Owners[num_ownerId1]), "Invalid Signature of "..num_ownerId1)
@@ -147,16 +139,18 @@ function request(str_reqType, num_ownerId1, str_signedMsgOwner1,  num_ownerId2, 
 
   -- perform request
   if str_reqType == 'W' then
-    contract.send(receiverOrVoteName, amount)
-    contract.event('withdraw', amount, receiverOrVoteName)
+    contract.send(receiver, amount)
+    contract.event('withdraw', amount, receiver)
   elseif str_reqType == 'S' then
     contract.stake(amount)
+    contract.event('stake', amount)
   elseif str_reqType == 'U' then
     contract.unstake(amount)
+    contract.event('unstake', amount)
   elseif str_reqType == 'V' then
     contract.vote(unpack(ballots))
-  elseif str_reqType == 'D' then
-    contract.voteDao(receiverOrVoteName, bignum.tostring(amount))
+    -- printing all ids will exceed max event size, so print just number of bps
+    contract.event('vote', #ballots)
   end
 end
 

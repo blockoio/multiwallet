@@ -9,7 +9,7 @@ var dir_js = path.resolve(__dirname, '../dapp/js');
 var dir_html = path.resolve(__dirname, '../dapp/html');
 var dir_css = path.resolve(__dirname, '../dapp/css');
 var dir_contract = path.resolve(__dirname, '../contract');
-var dir_build = path.resolve(__dirname, '../dapp/build');
+var dir_build = path.resolve(__dirname, '../docs');
 
 module.exports = {
     entry: {
