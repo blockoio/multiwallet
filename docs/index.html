@@ -1,122 +1,166 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8">
-    <title>2 of 4 multisig wallet dapp</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <title>2 of 4 multisig wallet dapp (v2)</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<h1>2 of 4 Multisig Wallet Simple DApp</h1>
+  <h1>2 of 4 Multisig Wallet Simple DApp (v2)</h1>
 
 
-<h2> Contract Address </h2>
+  <h2> Contract Address </h2>
 
-<input type="text" id="serverAddressText" size="20" placeholder="( Put Server IP:PORT )">
-<input type="text" id="contractAddressText" size="54" placeholder="( Put Contract Address )"> 
-<input type="button" id="contractSetButton" value="Load Contract">
-<br><br>
-<div id="contractStateDiv">(Contract does not set)</div>
+  <input type="text" id="serverAddressText" size="20" placeholder="( Put Server IP:PORT )">
+  <input type="text" id="contractAddressText" size="54" placeholder="( Put Contract Address )">
+  <input type="button" id="contractSetButton" value="Load Contract">
+  <br><br>
+  <div id="contractStateDiv">(Contract does not set)</div>
 
 
-<h2> Payload Generator </h2>
+  <h2> Payload Generator </h2>
 
-<div class="tab">
-  <button class="tablinks" id="b1">Withdraw</button>
-  <button class="tablinks" id="b2">Staking</button>
-  <button class="tablinks" id="b3">Unstaking</button>
-  <button class="tablinks" id="b4">Voting</button>
-</div>
+  <div class="tab">
+    <button class="tablinks" id="b1">Withdraw</button>
+    <button class="tablinks" id="b2">Staking</button>
+    <button class="tablinks" id="b3">Unstaking</button>
+    <button class="tablinks" id="b4">Voting</button>
+    <button class="tablinks" id="b5">DAO</button>
+  </div>
 
-<div class="requestarea">
+  <div class="requestarea">
 
-<div class="tabcontent" id="withdrawDiv">
-  <table>
-    <tr>
-      <td width="150">Amount:</td>
-      <td><input type="text" id="withdrawAmountText" size="30"></td>
-    </tr>
-    <tr>
-      <td>To Address:</td>
-      <td><input type="text" id="withdrawToAddressText" size="52"></td>
-    </tr>
-  </table>
-</div>
+    <div class="tabcontent" id="withdrawDiv">
+      <table>
+        <tr>
+          <td width="150">Amount:</td>
+          <td><input type="text" id="amountText" size="30"> aer (<span id="amountConv">0</span> aergo)</td>
+        </tr>
+        <tr>
+          <td>To Address:</td>
+          <td><input type="text" id="toAddressText" size="52"></td>
+        </tr>
+      </table>
+    </div>
 
-<div class="tabcontent" id="stakeAndUnstakeDiv">
-  <table>
-    <tr>
-      <td width="150">Amount:</td>
-      <td><input type="text" id="stakeAndUnstakeAmountText" size="30"></td>
-  </table>
-</div>
+    <div class="tabcontent" id="stakeAndUnstakeDiv">
+      <table>
+        <tr>
+          <td width="150">Amount:</td>
+          <td><input type="text" id="stakeAndUnstakeAmountText" size="30"> aer (<span id="stakeAmountConv">0</span> aergo)</td>
+      </table>
+    </div>
 
-<div class="tabcontent" id="voteDiv">
-  <table>
-    <tr>
-      <td width="150">List of BPs:</td>
-      <td><textarea id="bpListText" cols="70" rows="13" placeholder="( List up BP keys, separated by newline )"></textarea></td>
-    </tr>
-  </table>
-</div>
+    <div class="tabcontent" id="voteDiv">
+      <table>
+        <tr>
+          <td width="150">List of BPs:</td>
+          <td><textarea id="bpListText" cols="70" rows="13"
+              placeholder="( List up BP keys, separated by newline )"></textarea></td>
+        </tr>
+      </table>
+    </div>
 
-<table>
-    <tr>
+    <div class="tabcontent" id="daoDiv">
+      <table>
+        <tr>
+          <td width="150">Vote Name:</td>
+          <td><input type="text" id="daoVoteNameText" size="30"></td>
+        </tr>
+        <tr>
+          <td>Value:</td>
+          <td><input type="text" id="daoValueText" size="30"></td>
+        </tr>
+
+      </table>
+    </div>
+
+    <table>
+      <tr>
         <th width="150"></th>
         <th width="80"></th>
         <th></th>
       </tr>
-  <tr>
-    <td td width="150"><input type="button" id="genMsgButton" value="Query Gen Msg"></td>
-    <td colspan="2"><input type="text" id="withdrawResultText" size="65" placeholder="( query result be generated here )" readonly></textarea> </td>
-  </tr>
-  <tr>
-    <th></th>
-    <th>Owner ID</th>
-    <th>Signed Message</th>
-  </tr>
-  <tr>
-    <td>1st Owner:</td>
-    <td>
-      <select id="ownerSelect1">
-        <option value="1" selected>1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-      </select>
-    </td>
-    <td><input type="text" id="signedMsgText1" size="65"></td>
-  </tr>
-  <tr>
-    <td>2nd Owner:</td>
-    <td>
-      <select id="ownerSelect2">
-        <option value="1">1</option>
-        <option value="2" selected>2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-      </select>
-    </td>
-    <td><input type="text" id="signedMsgText2" size="65"></td>
-  </tr>
-  <tr>
-    <td><input type="button" id="genRequestPayloadButton" value="Gen Req Payload"></td>
-    <td colspan="2"><textarea id="requestResultText" cols="80" rows="5" placeholder="( payload will be generated here )" readonly></textarea></td>
-  </tr>
-</table>
-</div>
+      <tr>
+        <td>
+          <input type="button" id="shareButton" value="Create Request URL">
+        </td>
+        <td colspan="2">
+            <input type="text" id="shareRequestText" size="65"
+            placeholder="( link for sharing and requesting sign )" readonly>
+          </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="button" id="signButton" value="Sign to the Request">
+        </td>
+        <td colspan="2">
+          <input type="text" id="signedMsgText" size="65"
+          placeholder="( signed generated query result )" readonly>
+        </td>
+      </tr>
+      <!-- spacing start -->
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr class="top-border">
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <!-- spacing end -->
+      <tr>
+        <th></th>
+        <th>Owner ID</th>
+        <th>Signed Message</th>
+      </tr>
+      <tr>
+        <td>1st Owner:</td>
+        <td>
+          <select id="ownerSelect1">
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </td>
+        <td><input type="text" id="signedMsgText1" size="65"></td>
+      </tr>
+      <tr>
+        <td>2nd Owner:</td>
+        <td>
+          <select id="ownerSelect2">
+            <option value="1">1</option>
+            <option value="2" selected>2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </td>
+        <td><input type="text" id="signedMsgText2" size="65"></td>
+      </tr>
+      <tr>
+        <td colspan="3" align="center"><input type="button" id="sendRequestButton" value="Send Request"></td>
+      </tr>
+    </table>
+  </div>
 
-<br>
-<button id="guideDiv" class="collapsible">Resources</button>
-<div class="content">
-<h2>Download</h2>
-<a href="multisig2of4.lua">Source Code</a>
-<br>
-<a href="contract.payload">Compiled Payload</a>
+  <br>
+  <button id="guideDiv" class="collapsible">Resources</button>
+  <div class="content">
+    <h2>Download</h2>
+    <a href="multisig2of4.lua">Smart Contract Source Code</a>
+    <br>
+    <a href="contract.payload">Compiled Payload</a>
 
-<h2>Repository</h2>
-<a href="https://github.com/blockoio/multiwallet">Link</a>
-</div>
+    <h2>Repository</h2>
+    <a href="https://github.com/blockoio/multiwallet">Link</a>
+  </div>
 </body>
 <script src="main.js"></script>
+
 </html>

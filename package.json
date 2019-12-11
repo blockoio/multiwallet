@@ -4,7 +4,7 @@
   "description": "2 of 4 Multisig & Multipurpose Wallet for Aergo",
   "main": "js/main.js",
   "scripts": {
-    "build": "aergoluac --payload ./contract/multisig2of4.lua > ./dapp/build/contract.payload && webpack --config config/webpack.config.js",
+    "build": "aergoluac --payload ./contract/multisig2of4.lua > ./docs/contract.payload && webpack --config config/webpack.config.js",
     "watch": "webpack --config config/webpack.config.js --watch",
     "start": "webpack-dev-server --host localhost --hot --inline --config config/webpack.config.js"
   },
