@@ -9,7 +9,6 @@ export function sendTxByAergoConnect(endpoint, contractID, payload) {
     payload_json: payload,
     type: 5,
   }
-  console.log(payload, 'payload')
 
   return new Promise((resolve, reject) => {
     try {
