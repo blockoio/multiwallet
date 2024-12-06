@@ -6,7 +6,8 @@ export function sendTxByAergoConnect(endpoint, contractID, payload) {
     var builtTx = {
         to: contractID,
         amount: "0",
-        payload_json: payload
+        payload_json: payload,
+        type: 5
     }
 
     return new Promise((resolve, reject) => {
